@@ -62,15 +62,18 @@ Plug 'joshdick/onedark.vim'
 Plug 'Yggdroot/indentLine'
 Plug 'mhinz/vim-startify'
 Plug 'tpope/vim-surround'
-Plug 'sage25/leetcode.vim'
+Plug 'ryanoasis/vim-devicons'
+" Plug 'sage25/leetcode.vim'
 " Plug 'github/copilot.vim'
 call plug#end()
 
 " ==================== 插件相关配置 ====================
 " ---- NERDTree 自动打开/关闭 ----
 autocmd VimEnter * NERDTree | wincmd p
-let g:NERDTreeWinSize = 20
+let g:NERDTreeWinSize = 28
 autocmd BufEnter * if tabpagenr('$') == 1 && winnr('$') == 1 && exists('b:NERDTree') && b:NERDTree.isTabTree() | silent! quit | endif
+let NERDTreeShowHidden=1
+let NERDTreeIgnore = ['\.git$', 'node_moduled']
 
 " ---- IndentLine ----
 let g:indentLine_enabled = 1
