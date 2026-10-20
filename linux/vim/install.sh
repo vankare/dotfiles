@@ -23,22 +23,18 @@ if [ ! -f "$VIM_PLUG_PATH" ]; then
 
     mkdir -p "$(dirname "$VIM_PLUG_PATH")"
 
-    PLUG_URLS=(
-        "https://cdn.jsdelivr.net/gh/junegunn/vim-plug@master/plug.vim"
-        "https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim"
-    )
-
-    for url in "${PLUG_URLS[@]}"; do
-        if wget -q -T 20 --tries 3 -O "$VIM_PLUG_PATH" "$url"; then
-            echo "Successfully downloaded vim-plug"
-            break
-        fi
-
-        echo "WARN: download failed: $url" >&2
-    done
+    if wget -q -T 20 --tries 3 \
+        -O "$VIM_PLUG_PATH" \
+        "https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim"; then
+        echo "Successfully downloaded vim-plug"
+    else
+        echo "ERROR: failed to download vim-plug." >&2
+        rm -f "$VIM_PLUG_PATH"
+        exit 1
+    fi
 
     if [ ! -s "$VIM_PLUG_PATH" ]; then
-        echo "ERROR: all attempts to download vim-plug failed." >&2
+        echo "ERROR: downloaded vim-plug file is empty." >&2
         rm -f "$VIM_PLUG_PATH"
         exit 1
     fi

@@ -140,6 +140,7 @@ function! ShowDocumentation()
 endfunction
 
 autocmd CursorHold * silent call CocActionAsync('highlight')
+nnoremap <F8> :call CocAction('showOutline')<CR>
 
 " ===================== 视图与文件位置保存 =====================
 set viewoptions=folds,cursor,unix,slash
